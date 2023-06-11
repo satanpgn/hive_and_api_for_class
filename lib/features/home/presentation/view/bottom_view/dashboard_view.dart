@@ -35,7 +35,7 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
                 ),
               ),
             ),
-            Flexible(
+            Expanded(
               child: BatchWidget(batchList: batchState.batches),
             ),
             const Align(

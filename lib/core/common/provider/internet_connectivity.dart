@@ -29,5 +29,3 @@ class ConnectivityStatusNotifier extends StateNotifier<ConnectivityStatus> {
     }
   }
 }
-
-
