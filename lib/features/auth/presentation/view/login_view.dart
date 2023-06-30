@@ -75,7 +75,6 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     ),
                     _gap,
                     ElevatedButton(
-                      key: const ValueKey('loginButton'),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await ref

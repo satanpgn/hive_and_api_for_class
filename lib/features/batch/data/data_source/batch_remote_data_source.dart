@@ -6,7 +6,7 @@ import 'package:hive_and_api_for_class/core/failure/failure.dart';
 import 'package:hive_and_api_for_class/core/network/remote/http_service.dart';
 import 'package:hive_and_api_for_class/core/shared_prefs/user_shared_prefs.dart';
 import 'package:hive_and_api_for_class/features/auth/data/model/auth_api_model.dart';
-import 'package:hive_and_api_for_class/features/auth/domain/entity/student_entity.dart';
+import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 import 'package:hive_and_api_for_class/features/batch/data/dto/get_all_batch_dto.dart';
 import 'package:hive_and_api_for_class/features/batch/data/model/batch_api_model.dart';
 import 'package:hive_and_api_for_class/features/batch/domain/entity/batch_entity.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_and_api_for_class/config/router/app_route.dart';
 import 'package:hive_and_api_for_class/core/common/snackbar/my_snackbar.dart';
-import 'package:hive_and_api_for_class/features/auth/domain/entity/student_entity.dart';
+import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 import 'package:hive_and_api_for_class/features/auth/domain/use_case/auth_usecase.dart';
 import 'package:hive_and_api_for_class/features/auth/presentation/state/auth_state.dart';
 

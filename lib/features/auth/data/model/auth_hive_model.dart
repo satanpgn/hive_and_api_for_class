@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_and_api_for_class/config/constants/hive_table_constant.dart';
-import 'package:hive_and_api_for_class/features/auth/domain/entity/student_entity.dart';
+import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 import 'package:hive_and_api_for_class/features/batch/data/model/batch_hive_model.dart';
 import 'package:hive_and_api_for_class/features/course/data/model/course_hive_model.dart';
 import 'package:uuid/uuid.dart';

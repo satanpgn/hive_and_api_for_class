@@ -1,4 +1,4 @@
-import 'package:hive_and_api_for_class/features/auth/domain/entity/student_entity.dart';
+import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 import 'package:hive_and_api_for_class/features/batch/domain/entity/batch_entity.dart';
 
 class BatchState {

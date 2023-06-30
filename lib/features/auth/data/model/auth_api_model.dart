@@ -3,7 +3,7 @@ import 'package:hive_and_api_for_class/features/batch/data/model/batch_api_model
 import 'package:hive_and_api_for_class/features/course/data/model/course_api_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../domain/entity/student_entity.dart';
+import '../../domain/entity/auth_entity.dart';
 
 part 'auth_api_model.g.dart';
 
@@ -55,7 +55,7 @@ class AuthApiModel {
         lname: lname,
         image: image,
         phone: phone,
-        batch: batch?.toEntity(),
+        batch: batch!.toEntity(),
         courses: course.map((e) => e.toEntity()).toList(),
         username: username,
         password: password ?? '',

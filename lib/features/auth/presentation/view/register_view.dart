@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_and_api_for_class/features/auth/domain/entity/student_entity.dart';
+import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 import 'package:hive_and_api_for_class/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:hive_and_api_for_class/features/batch/domain/entity/batch_entity.dart';
 import 'package:hive_and_api_for_class/features/batch/presentation/viewmodel/batch_view_model.dart';
@@ -50,18 +50,23 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _gap = const SizedBox(height: 8);
 
   final _key = GlobalKey<FormState>();
-  final _fnameController = TextEditingController(text: 'Kiran');
-  final _lnameController = TextEditingController(text: 'Rana');
-  final _phoneController = TextEditingController(text: '9812345678');
-  final _usernameController = TextEditingController(text: 'kiran');
-  final _passwordController = TextEditingController(text: 'kiran123');
+  // final _fnameController = TextEditingController(text: 'Kiran');
+  // final _lnameController = TextEditingController(text: 'Rana');
+  // final _phoneController = TextEditingController(text: '9812345678');
+  // final _usernameController = TextEditingController(text: 'kiran');
+  // final _passwordController = TextEditingController(text: 'kiran123');
+
+  final _fnameController = TextEditingController();
+  final _lnameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   bool isObscure = true;
   @override
   Widget build(BuildContext context) {
     final batchState = ref.watch(batchViewModelProvider);
     final courseState = ref.watch(courseViewModelProvider);
-    final authState = ref.watch(authViewModelProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
@@ -175,9 +180,9 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                       child: Text(batchState.error!),
                     )
                   } else ...{
-                    DropdownButtonFormField(
+                    DropdownButtonFormField<BatchEntity>(
                       items: batchState.batches
-                          .map((e) => DropdownMenuItem(
+                          .map((e) => DropdownMenuItem<BatchEntity>(
                                 value: e,
                                 child: Text(e.batchName),
                               ))
@@ -210,10 +215,12 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     MultiSelectDialogField(
                       title: const Text('Select course'),
                       items: courseState.courses
-                          .map((course) => MultiSelectItem(
-                                course,
-                                course.courseName,
-                              ))
+                          .map(
+                            (course) => MultiSelectItem(
+                              course,
+                              course.courseName,
+                            ),
+                          )
                           .toList(),
                       listType: MultiSelectListType.CHIP,
                       buttonText: const Text('Select course'),
@@ -274,43 +281,49 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     }),
                   ),
                   _gap,
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_key.currentState!.validate()) {
-                          var student = AuthEntity(
-                            fname: _fnameController.text,
-                            lname: _lnameController.text,
-                            image:
-                                ref.read(authViewModelProvider).imageName ?? '',
-                            phone: _phoneController.text,
-                            username: _usernameController.text,
-                            password: _passwordController.text,
-                            batch: _dropDownValue,
-                            courses: _lstCourseSelected,
-                          );
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_key.currentState!.validate()) {
+                        var student = AuthEntity(
+                          fname: _fnameController.text,
+                          lname: _lnameController.text,
+                          image:
+                              ref.read(authViewModelProvider).imageName ?? '',
+                          phone: _phoneController.text,
+                          username: _usernameController.text,
+                          password: _passwordController.text,
+                          batch: _dropDownValue!,
+                          courses: _lstCourseSelected,
+                        );
 
-                          ref
-                              .read(authViewModelProvider.notifier)
-                              .registerStudent(context, student);
+                        ref
+                            .read(authViewModelProvider.notifier)
+                            .registerStudent(context, student);
+                      }
+                    },
+                    child: const Text('Test'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_key.currentState!.validate()) {
+                        var student = AuthEntity(
+                          fname: _fnameController.text,
+                          lname: _lnameController.text,
+                          image:
+                              ref.read(authViewModelProvider).imageName ?? '',
+                          phone: _phoneController.text,
+                          username: _usernameController.text,
+                          password: _passwordController.text,
+                          batch: _dropDownValue!,
+                          courses: _lstCourseSelected,
+                        );
 
-                          // if (authState.error != null) {
-                          //   showSnackBar(
-                          //     message: authState.error.toString(),
-                          //     context: context,
-                          //     color: Colors.red,
-                          //   );
-                          // } else {
-                          //   showSnackBar(
-                          //     message: 'Registered successfully',
-                          //     context: context,
-                          //   );
-                          // }
-                        }
-                      },
-                      child: const Text('Register'),
-                    ),
+                        ref
+                            .read(authViewModelProvider.notifier)
+                            .registerStudent(context, student);
+                      }
+                    },
+                    child: const Text('Register'),
                   ),
                 ],
               ),

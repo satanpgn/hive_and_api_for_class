@@ -20,5 +20,10 @@ class BatchEntity extends Equatable {
       };
 
   @override
+  String toString() {
+    return 'BatchEntity(batchId: $batchId, batchName: $batchName)';
+  }
+
+  @override
   List<Object?> get props => [batchId, batchName];
 }

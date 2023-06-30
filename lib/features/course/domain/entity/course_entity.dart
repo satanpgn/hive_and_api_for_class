@@ -20,4 +20,9 @@ class CourseEntity {
       'courseName': courseName,
     };
   }
+
+  @override
+  String toString() {
+    return 'CourseEntity(courseId: $courseId, courseName: $courseName)';
+  }
 }

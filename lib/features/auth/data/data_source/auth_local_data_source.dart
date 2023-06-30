@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_and_api_for_class/core/failure/failure.dart';
 import 'package:hive_and_api_for_class/core/network/local/hive_service.dart';
 import 'package:hive_and_api_for_class/features/auth/data/model/auth_hive_model.dart';
-import 'package:hive_and_api_for_class/features/auth/domain/entity/student_entity.dart';
+import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 
 final authLocalDataSourceProvider = Provider(
   (ref) => AuthLocalDataSource(
