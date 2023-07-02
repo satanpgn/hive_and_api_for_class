@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_and_api_for_class/config/router/app_route.dart';
 import 'package:hive_and_api_for_class/core/common/snackbar/my_snackbar.dart';
+import 'package:hive_and_api_for_class/core/shared_prefs/app_theme_prefs.dart';
 import 'package:hive_and_api_for_class/core/shared_prefs/user_shared_prefs.dart';
 
 final homeViewModelProvider = StateNotifierProvider<HomeViewModel, bool>(
   (ref) => HomeViewModel(
     ref.read(userSharedPrefsProvider),
+    ref.read(appThemePrefsProvider),
   ),
 );
 
 class HomeViewModel extends StateNotifier<bool> {
   final UserSharedPrefs _userSharedPrefs;
-  HomeViewModel(this._userSharedPrefs) : super(false);
+  final AppThemePrefs _appThemePrefs;
+  HomeViewModel(this._userSharedPrefs, this._appThemePrefs) : super(false);
 
   void logout(BuildContext context) async {
     state = true;

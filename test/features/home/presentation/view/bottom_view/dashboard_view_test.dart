@@ -101,24 +101,22 @@ import '../../../../../../test_data/batch_entity_test.dart';
 import '../../../../../../test_data/course_entity_test.dart';
 import '../../../../auth/presentation/view/login_view_test.mocks.dart';
 
-class MockBatchViewModel extends Mock implements BatchViewModel {}
-
 void main() {
   late BatchUseCase mockBatchUsecase;
   late CourseUseCase mockCourseUsecase;
   late List<BatchEntity> batchEntity;
   late List<CourseEntity> courseEntity;
 
-  setUp(() async {
+  setUpAll(() async {
     mockBatchUsecase = MockBatchUseCase();
     mockCourseUsecase = MockCourseUseCase();
     batchEntity = await getBatchListTest();
     courseEntity = await getCourseListTest();
   });
+
   testWidgets(
     'dashboard view ...',
     (tester) async {
-      // Get the data from the test data not the actual api
       when(mockBatchUsecase.getAllBatches())
           .thenAnswer((_) async => Right(batchEntity));
 
@@ -141,12 +139,11 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-
-      expect(find.text('Dashboard View'), findsOneWidget);
-
-//      expect(find.byType(Card), findsNWidgets(4));
+      expect(find.byType(GridView), findsNWidgets(2));
     },
   );
 }
+
+
 
 //https://www.youtube.com/watch?v=7E-YOGBitqc&t=885s

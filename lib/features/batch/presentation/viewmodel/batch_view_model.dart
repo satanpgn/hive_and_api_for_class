@@ -8,7 +8,7 @@ import 'package:hive_and_api_for_class/features/batch/presentation/state/batch_s
 final batchViewModelProvider =
     StateNotifierProvider<BatchViewModel, BatchState>(
   (ref) {
-    return BatchViewModel(ref.watch(batchUsecaseProvider));
+    return BatchViewModel(ref.read(batchUsecaseProvider));
   },
 );
 

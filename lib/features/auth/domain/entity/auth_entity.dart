@@ -52,7 +52,6 @@ class AuthEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
         fname,
         lname,
         image,

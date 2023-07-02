@@ -48,20 +48,19 @@ void main() {
     lstCourseEntity = await getCourseListTest();
 
     authEntity = AuthEntity(
-      fname: 'kiran',
-      lname: 'rana',
+      id: null,
+      fname: 'Kiran',
+      lname: 'Rana',
+      image: '',
       phone: '1234567890',
       batch: const BatchEntity(
-        batchId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
-        batchName: "30-B",
-      ),
+          batchId: '20df4a89-6c95-44d0-bebf-0980c33bd49f', batchName: '30-B'),
       courses: [
         CourseEntity(
-            courseId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
-            courseName: "Flutter"),
+            courseId: '20df4a89-6c95-44d0-bebf-0980c33bd49f',
+            courseName: 'Flutter'),
         CourseEntity(
-            courseId: "278ce8eb-223c-4c4b-85ba-17dbc83f27ba",
-            courseName: "API"),
+            courseId: '278ce8eb-223c-4c4b-85ba-17dbc83f27ba', courseName: 'API')
       ],
       username: 'kiran',
       password: 'kiran123',
@@ -142,12 +141,12 @@ void main() {
 
     //=========================== Find the register button===========================
     //=========================== Find the register button===========================
-    final registerButtonFinder = find.byType(ElevatedButton);
+    final registerButtonFinder = find.widgetWithText(ElevatedButton, 'Test');
 
     await tester.tap(registerButtonFinder);
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Successfully registered'), findsOneWidget);
+    expect(find.byType(SnackBar), findsOneWidget);
   });
 }

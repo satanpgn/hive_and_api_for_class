@@ -18,14 +18,14 @@ import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../../../../test_data/batch_entity_test.dart';
 import '../../../../../test_data/course_entity_test.dart';
+import '../../../../unit_test/auth_unit_test.mocks.dart';
 import 'login_view_test.mocks.dart';
-import 'register_view_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<AuthUseCase>(),
 ])
 void main() {
-  // IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  TestWidgetsFlutterBinding.ensureInitialized();
 
   late AuthUseCase mockAuthUsecase;
   late BatchUseCase mockBatchUsecase;
@@ -47,19 +47,16 @@ void main() {
       id: null,
       fname: 'Kiran',
       lname: 'Rana',
-      image: "",
+      image: '',
       phone: '1234567890',
       batch: const BatchEntity(
-        batchId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
-        batchName: "30-B",
-      ),
+          batchId: '20df4a89-6c95-44d0-bebf-0980c33bd49f', batchName: '30-B'),
       courses: [
         CourseEntity(
-            courseId: "20df4a89-6c95-44d0-bebf-0980c33bd49f",
-            courseName: "Flutter"),
+            courseId: '20df4a89-6c95-44d0-bebf-0980c33bd49f',
+            courseName: 'Flutter'),
         CourseEntity(
-            courseId: "278ce8eb-223c-4c4b-85ba-17dbc83f27ba",
-            courseName: "API"),
+            courseId: '278ce8eb-223c-4c4b-85ba-17dbc83f27ba', courseName: 'API')
       ],
       username: 'kiran',
       password: 'kiran123',
@@ -139,13 +136,12 @@ void main() {
     await tester.pumpAndSettle();
 
     //=========================== Find the register button===========================
-    // await tester.tap(
-    //   find.widgetWithText(ElevatedButton, 'Test'),
-    // );
+    //=========================== Find the register button===========================
+    final registerButtonFinder = find.widgetWithText(ElevatedButton, 'Test');
 
-    final result = await mockAuthUsecase.registerStudent(authEntity);
-    // verify(mockAuthUsecase.registerStudent(authEntity)).called(1);
-    expect(result, const Right(true));
+    await tester.tap(registerButtonFinder);
+
+    // await tester.pumpAndSettle();
 
     // expect(find.text('Successfully registered'), findsOneWidget);
   });

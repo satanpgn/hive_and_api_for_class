@@ -296,6 +296,7 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                           courses: _lstCourseSelected,
                         );
 
+                        print(student);
                         ref
                             .read(authViewModelProvider.notifier)
                             .registerStudent(context, student);

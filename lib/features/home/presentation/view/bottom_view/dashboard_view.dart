@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_and_api_for_class/core/common/provider/is_dark_theme.dart';
 import 'package:hive_and_api_for_class/core/common/snackbar/my_snackbar.dart';
 import 'package:hive_and_api_for_class/features/batch/presentation/viewmodel/batch_view_model.dart';
 import 'package:hive_and_api_for_class/features/course/presentation/viewmodel/course_viewmodel.dart';
@@ -16,6 +17,13 @@ class DashboardView extends ConsumerStatefulWidget {
 }
 
 class _DashboardViewState extends ConsumerState<DashboardView> {
+  late bool isDark;
+  @override
+  void initState() {
+    isDark = ref.read(isDarkThemeProvider);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var batchState = ref.watch(batchViewModelProvider);
@@ -44,6 +52,14 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
               color: Colors.white,
             ),
           ),
+          Switch(
+              value: isDark,
+              onChanged: (value) {
+                setState(() {
+                  isDark = value;
+                  ref.read(isDarkThemeProvider.notifier).updateTheme(value);
+                });
+              }),
         ],
       ),
       body: Padding(

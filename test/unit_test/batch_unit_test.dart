@@ -20,13 +20,11 @@ void main() {
   late BatchUseCase mockBatchUsecase;
   late List<BatchEntity> batchEntity;
 
-  setUp(() async {
+  setUpAll(() async {
     mockBatchUsecase = MockBatchUseCase();
     batchEntity = await getBatchListTest();
-
     when(mockBatchUsecase.getAllBatches())
         .thenAnswer((_) async => const Right([]));
-
     container = ProviderContainer(
       overrides: [
         batchViewModelProvider.overrideWith(
@@ -36,10 +34,12 @@ void main() {
     );
   });
 
-  test('check batch initial state', () {
+  test('check batch initial state', () async {
+    await container.read(batchViewModelProvider.notifier).getAllBatches();
+
     final batchState = container.read(batchViewModelProvider);
 
-    expect(batchState.isLoading, true);
+    expect(batchState.isLoading, false);
     expect(batchState.batches, isEmpty);
     expect(batchState.students, isEmpty);
   });

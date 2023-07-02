@@ -4,11 +4,21 @@ import 'package:hive_and_api_for_class/config/constants/theme_constant.dart';
 class AppTheme {
   AppTheme._();
 
-  static getApplicationTheme() {
+  static getApplicationTheme(bool isDark) {
     return ThemeData(
-      colorScheme: const ColorScheme.light(
-        primary: ThemeConstant.primaryColor,
-      ),
+      // colorScheme: const ColorScheme.light(
+      //   primary: ThemeConstant.primaryColor,
+      // ),
+
+      // change the theme according to the user choice
+      colorScheme: isDark
+          ? const ColorScheme.dark(
+              primary: ThemeConstant.darkPrimaryColor,
+            )
+          : const ColorScheme.light(
+              primary: ThemeConstant.primaryColor,
+            ),
+      brightness: isDark ? Brightness.dark : Brightness.light,
       fontFamily: 'Montserrat',
       useMaterial3: true,
 
