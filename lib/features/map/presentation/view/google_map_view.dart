@@ -10,11 +10,12 @@ class GoogleMapView extends StatefulWidget {
 
 class _GoogleMapViewState extends State<GoogleMapView> {
   late GoogleMapController mapController;
-  Set<Marker> markers = {};
+  late Set<Marker> markers;
   late LatLng myLocation;
 
   @override
   void initState() {
+    markers = {};
     myLocation = const LatLng(27.7172, 85.3240);
     markers.add(
       Marker(
