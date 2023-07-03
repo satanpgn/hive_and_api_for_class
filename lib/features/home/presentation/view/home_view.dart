@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_and_api_for_class/features/course/presentation/view/add_course_view.dart';
 import 'package:hive_and_api_for_class/features/home/presentation/view/bottom_view/dashboard_view.dart';
 import 'package:hive_and_api_for_class/features/home/presentation/view/bottom_view/profile_view.dart';
+import 'package:hive_and_api_for_class/features/map/presentation/view/google_map_view.dart';
 
 import '../../../batch/presentation/view/add_batch_view.dart';
 
@@ -20,6 +21,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     const AddCourseView(),
     const AddBatchView(),
     const ProfileView(),
+    const GoogleMapView(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_city_outlined),
+            label: 'Location',
           ),
         ],
         currentIndex: selectedIndex,

@@ -33,7 +33,7 @@ class AuthRemoteDataSource {
           "image": student.image,
           "username": student.username,
           "password": student.password,
-          "batch": student.batch!.batchId,
+          "batch": student.batch.batchId,
           // "course": ["6489a5908dbc6d39719ec19c", "6489a5968dbc6d39719ec19e"]
           "course": student.courses.map((e) => e.courseId).toList(),
         },

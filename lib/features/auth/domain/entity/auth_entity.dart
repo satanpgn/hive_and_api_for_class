@@ -17,9 +17,6 @@ class AuthEntity extends Equatable {
   List<Object?> get props =>
       [id, fname, lname, image, phone, batch, courses, username, password];
 
-  
-  
-  
   const AuthEntity({
     this.id,
     required this.fname,

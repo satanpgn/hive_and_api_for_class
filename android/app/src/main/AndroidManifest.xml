@@ -6,6 +6,10 @@
         android:label="hive_and_api_for_class"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        
+        <meta-data android:name="com.google.android.geo.API_KEY" 
+            android:value="AIzaSyD4FnM71ikptGHzh_tg7EDOTYgucexiO3E"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
