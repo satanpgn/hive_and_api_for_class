@@ -6,7 +6,12 @@ import 'package:hive_and_api_for_class/features/batch/presentation/viewmodel/bat
 class BatchWidget extends StatelessWidget {
   final WidgetRef ref;
   final List<BatchEntity> batchList;
-  const BatchWidget({super.key, required this.ref, required this.batchList});
+
+  const BatchWidget({
+    super.key,
+    required this.ref,
+    required this.batchList,
+  });
 
   @override
   Widget build(BuildContext context) {

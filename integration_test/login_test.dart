@@ -15,10 +15,10 @@ import 'package:integration_test/integration_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../build/unit_test_assets/test_data/course_entity_test.dart';
 import '../test/features/auth/presentation/view/login_view_test.mocks.dart';
 import '../test/features/auth/presentation/view/register_view_test.mocks.dart';
 import '../test_data/batch_entity_test.dart';
+import '../test_data/course_entity_test.dart';
 
 @GenerateNiceMocks([
   MockSpec<BatchUseCase>(),

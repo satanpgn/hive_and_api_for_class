@@ -39,33 +39,39 @@ void main() {
   late List<CourseEntity> lstCourseEntity;
   late AuthEntity authEntity;
 
-  setUpAll(() async {
-    mockAuthUsecase = MockAuthUseCase();
-    mockBatchUsecase = MockBatchUseCase();
-    mockCourseUsecase = MockCourseUseCase();
+  setUpAll(
+    () async {
+      mockAuthUsecase = MockAuthUseCase();
+      mockBatchUsecase = MockBatchUseCase();
+      mockCourseUsecase = MockCourseUseCase();
 
-    lstBatchEntity = await getBatchListTest();
-    lstCourseEntity = await getCourseListTest();
+      lstBatchEntity = await getBatchListTest();
+      lstCourseEntity = await getCourseListTest();
 
-    authEntity = AuthEntity(
-      id: null,
-      fname: 'Kiran',
-      lname: 'Rana',
-      image: '',
-      phone: '1234567890',
-      batch: const BatchEntity(
-          batchId: '20df4a89-6c95-44d0-bebf-0980c33bd49f', batchName: '30-B'),
-      courses: [
-        CourseEntity(
-            courseId: '20df4a89-6c95-44d0-bebf-0980c33bd49f',
-            courseName: 'Flutter'),
-        CourseEntity(
-            courseId: '278ce8eb-223c-4c4b-85ba-17dbc83f27ba', courseName: 'API')
-      ],
-      username: 'kiran',
-      password: 'kiran123',
-    );
-  });
+      authEntity = const AuthEntity(
+        id: null,
+        fname: 'Kiran',
+        lname: 'Rana',
+        image: '',
+        phone: '1234567890',
+        batch: BatchEntity(
+          batchId: '20df4a89-6c95-44d0-bebf-0980c33bd49f',
+          batchName: '30-B',
+        ),
+        courses: [
+          CourseEntity(
+              courseId: '20df4a89-6c95-44d0-bebf-0980c33bd49f',
+              courseName: 'Flutter'),
+          CourseEntity(
+            courseId: '278ce8eb-223c-4c4b-85ba-17dbc83f27ba',
+            courseName: 'API',
+          )
+        ],
+        username: 'kiran',
+        password: 'kiran123',
+      );
+    },
+  );
 
   testWidgets('register view ...', (tester) async {
     when(mockBatchUsecase.getAllBatches())
@@ -140,13 +146,15 @@ void main() {
     await tester.pumpAndSettle();
 
     //=========================== Find the register button===========================
-    //=========================== Find the register button===========================
-    final registerButtonFinder = find.widgetWithText(ElevatedButton, 'Test');
+    final registerButtonFinder =
+        find.widgetWithText(ElevatedButton, 'Register');
 
     await tester.tap(registerButtonFinder);
 
     await tester.pumpAndSettle();
 
-    expect(find.byType(SnackBar), findsOneWidget);
+    // Check weather the snackbar is displayed or not
+    expect(find.widgetWithText(SnackBar, 'Successfully registered'),
+        findsOneWidget);
   });
 }

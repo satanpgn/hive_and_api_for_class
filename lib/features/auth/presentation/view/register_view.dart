@@ -281,29 +281,29 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     }),
                   ),
                   _gap,
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_key.currentState!.validate()) {
-                        var student = AuthEntity(
-                          fname: _fnameController.text,
-                          lname: _lnameController.text,
-                          image:
-                              ref.read(authViewModelProvider).imageName ?? '',
-                          phone: _phoneController.text,
-                          username: _usernameController.text,
-                          password: _passwordController.text,
-                          batch: _dropDownValue!,
-                          courses: _lstCourseSelected,
-                        );
+                  // ElevatedButton(
+                  //   onPressed: () {
+                  //     if (_key.currentState!.validate()) {
+                  //       var student = AuthEntity(
+                  //         fname: _fnameController.text,
+                  //         lname: _lnameController.text,
+                  //         image:
+                  //             ref.read(authViewModelProvider).imageName ?? '',
+                  //         phone: _phoneController.text,
+                  //         username: _usernameController.text,
+                  //         password: _passwordController.text,
+                  //         batch: _dropDownValue!,
+                  //         courses: _lstCourseSelected,
+                  //       );
 
-                        print(student);
-                        ref
-                            .read(authViewModelProvider.notifier)
-                            .registerStudent(context, student);
-                      }
-                    },
-                    child: const Text('Test'),
-                  ),
+                  //       print(student);
+                  //       ref
+                  //           .read(authViewModelProvider.notifier)
+                  //           .registerStudent(context, student);
+                  //     }
+                  //   },
+                  //   child: const Text('Test'),
+                  // ),
                   ElevatedButton(
                     onPressed: () {
                       if (_key.currentState!.validate()) {
