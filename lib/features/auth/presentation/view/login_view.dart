@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_and_api_for_class/config/router/app_route.dart';
+import 'package:hive_and_api_for_class/core/common/snackbar/my_snackbar.dart';
 import 'package:hive_and_api_for_class/features/auth/presentation/viewmodel/auth_view_model.dart';
 
 class LoginView extends ConsumerStatefulWidget {
@@ -13,6 +13,15 @@ class LoginView extends ConsumerStatefulWidget {
 }
 
 class _LoginViewState extends ConsumerState<LoginView> {
+  late AuthViewModel _authViewModel;
+
+  @override
+  void initState() {
+    _authViewModel = ref.read(authViewModelProvider.notifier);
+    _authViewModel.loginNavigator.context = context;
+    super.initState();
+  }
+
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController(text: 'kiran');
   final _passwordController = TextEditingController(text: 'kiran123');
@@ -80,10 +89,24 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           await ref
                               .read(authViewModelProvider.notifier)
                               .loginStudent(
-                                context,
                                 _usernameController.text,
                                 _passwordController.text,
                               );
+
+                          if (context.mounted) {
+                            if (ref.read(authViewModelProvider).error != null) {
+                              showSnackBar(
+                                message: 'Invalid credentials',
+                                context: context,
+                                color: Colors.red,
+                              );
+                            }
+                          }
+
+                          // Reset state
+                          await ref
+                              .read(authViewModelProvider.notifier)
+                              .resetState();
                         }
                       },
                       child: const SizedBox(
@@ -100,20 +123,18 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    ElevatedButton(
-                      key: const ValueKey('registerButton'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoute.registerRoute);
-                      },
-                      child: const SizedBox(
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Brand Bold',
-                            ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Navigator.pushNamed(context, AppRoute.registerRoute);
+                          _authViewModel.openRegisterScreen();
+                        },
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Brand Bold',
                           ),
                         ),
                       ),

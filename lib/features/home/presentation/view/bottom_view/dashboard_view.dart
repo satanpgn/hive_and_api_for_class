@@ -44,8 +44,15 @@ class _DashboardViewState extends ConsumerState<DashboardView> {
             ),
           ),
           IconButton(
-            onPressed: () {
-              ref.read(homeViewModelProvider.notifier).logout(context);
+            onPressed: () async {
+              await ref.read(homeViewModelProvider.notifier).logout();
+              if (context.mounted) {
+                showSnackBar(
+                  message: 'Loggin out...',
+                  context: context,
+                  color: Colors.red,
+                );
+              }
             },
             icon: const Icon(
               Icons.logout,

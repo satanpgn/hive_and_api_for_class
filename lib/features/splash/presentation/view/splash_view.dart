@@ -11,11 +11,15 @@ class SplashView extends ConsumerStatefulWidget {
 }
 
 class _SplashViewState extends ConsumerState<SplashView> {
+  late SplashViewModel splashViewModel;
+
   @override
   void initState() {
-    // Wait for 2 seconds and then navigate
+    splashViewModel = ref.read(splashViewModelProvider.notifier);
+
+    splashViewModel.splashNavigator.context = context;
     Future.delayed(const Duration(seconds: 2), () {
-      ref.read(splashViewModelProvider.notifier).init(context);
+      ref.read(splashViewModelProvider.notifier).init();
     });
 
     super.initState();

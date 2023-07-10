@@ -6,6 +6,7 @@ import 'package:hive_and_api_for_class/features/home/presentation/view/bottom_vi
 import 'package:hive_and_api_for_class/features/map/presentation/view/google_map_view.dart';
 
 import '../../../batch/presentation/view/add_batch_view.dart';
+import '../viewmodel/home_viewmodel.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -15,6 +16,13 @@ class HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<HomeView> {
+  @override
+  void initState() {
+    // Set the context
+    ref.read(homeViewModelProvider.notifier).homeNavigator.context = context;
+    super.initState();
+  }
+
   int selectedIndex = 0;
   List<Widget> lstScreen = [
     const DashboardView(),

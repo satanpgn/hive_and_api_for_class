@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_and_api_for_class/core/common/snackbar/my_snackbar.dart';
 import 'package:hive_and_api_for_class/features/auth/domain/entity/auth_entity.dart';
 import 'package:hive_and_api_for_class/features/auth/presentation/viewmodel/auth_view_model.dart';
 import 'package:hive_and_api_for_class/features/batch/domain/entity/batch_entity.dart';
@@ -50,17 +51,17 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
   final _gap = const SizedBox(height: 8);
 
   final _key = GlobalKey<FormState>();
-  // final _fnameController = TextEditingController(text: 'Kiran');
-  // final _lnameController = TextEditingController(text: 'Rana');
-  // final _phoneController = TextEditingController(text: '9812345678');
-  // final _usernameController = TextEditingController(text: 'kiran');
-  // final _passwordController = TextEditingController(text: 'kiran123');
+  final _fnameController = TextEditingController(text: 'Kiran');
+  final _lnameController = TextEditingController(text: 'Rana');
+  final _phoneController = TextEditingController(text: '9812345678');
+  final _usernameController = TextEditingController(text: 'kiran');
+  final _passwordController = TextEditingController(text: 'kiran123');
 
-  final _fnameController = TextEditingController();
-  final _lnameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+  // final _fnameController = TextEditingController();
+  // final _lnameController = TextEditingController();
+  // final _phoneController = TextEditingController();
+  // final _usernameController = TextEditingController();
+  // final _passwordController = TextEditingController();
 
   bool isObscure = true;
   @override
@@ -281,50 +282,49 @@ class _RegisterViewState extends ConsumerState<RegisterView> {
                     }),
                   ),
                   _gap,
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     if (_key.currentState!.validate()) {
-                  //       var student = AuthEntity(
-                  //         fname: _fnameController.text,
-                  //         lname: _lnameController.text,
-                  //         image:
-                  //             ref.read(authViewModelProvider).imageName ?? '',
-                  //         phone: _phoneController.text,
-                  //         username: _usernameController.text,
-                  //         password: _passwordController.text,
-                  //         batch: _dropDownValue!,
-                  //         courses: _lstCourseSelected,
-                  //       );
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_key.currentState!.validate()) {
+                          var student = AuthEntity(
+                            fname: _fnameController.text,
+                            lname: _lnameController.text,
+                            image:
+                                ref.read(authViewModelProvider).imageName ?? '',
+                            phone: _phoneController.text,
+                            username: _usernameController.text,
+                            password: _passwordController.text,
+                            batch: _dropDownValue!,
+                            courses: _lstCourseSelected,
+                          );
 
-                  //       print(student);
-                  //       ref
-                  //           .read(authViewModelProvider.notifier)
-                  //           .registerStudent(context, student);
-                  //     }
-                  //   },
-                  //   child: const Text('Test'),
-                  // ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_key.currentState!.validate()) {
-                        var student = AuthEntity(
-                          fname: _fnameController.text,
-                          lname: _lnameController.text,
-                          image:
-                              ref.read(authViewModelProvider).imageName ?? '',
-                          phone: _phoneController.text,
-                          username: _usernameController.text,
-                          password: _passwordController.text,
-                          batch: _dropDownValue!,
-                          courses: _lstCourseSelected,
-                        );
+                          await ref
+                              .read(authViewModelProvider.notifier)
+                              .registerStudent(student);
 
-                        ref
-                            .read(authViewModelProvider.notifier)
-                            .registerStudent(context, student);
-                      }
-                    },
-                    child: const Text('Register'),
+                          if (context.mounted) {
+                            if (ref.read(authViewModelProvider).error == null) {
+                              showSnackBar(
+                                  message: 'Registered Successfully',
+                                  context: context);
+                            } else {
+                              showSnackBar(
+                                message: ref.read(authViewModelProvider).error!,
+                                context: context,
+                                color: Colors.red,
+                              );
+                            }
+
+                            // Reset state as it is used in login page as well
+                            ref
+                                .read(authViewModelProvider.notifier)
+                                .resetState();
+                          }
+                        }
+                      },
+                      child: const Text('Register'),
+                    ),
                   ),
                 ],
               ),
