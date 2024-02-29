@@ -36,13 +36,6 @@ void main() {
     expect(authState.isLoading, false);
     expect(authState.error, isNull);
     expect(authState.imageName, isNull);
-
-
-
-
-
-
-
   });
 
   // While testing this for now comment the navigation part and snackbar part

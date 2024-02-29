@@ -23,6 +23,7 @@ import 'login_view_test.mocks.dart';
   MockSpec<BatchUseCase>(),
   MockSpec<CourseUseCase>(),
 ])
+
 void main() {
   late AuthUseCase mockAuthUsecase;
   late BatchUseCase mockBatchUsecase;

@@ -14,6 +14,7 @@ import 'batch_unit_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<BatchUseCase>(),
 ])
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late ProviderContainer container;

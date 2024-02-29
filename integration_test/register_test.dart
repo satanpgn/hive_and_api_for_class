@@ -154,6 +154,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Check weather the snackbar is displayed or not
+    expect(find.byType(SnackBar), findsOneWidget);
     expect(find.widgetWithText(SnackBar, 'Successfully registered'),
         findsOneWidget);
   });

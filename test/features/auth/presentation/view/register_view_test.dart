@@ -24,6 +24,7 @@ import 'login_view_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<AuthUseCase>(),
 ])
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -62,7 +63,6 @@ void main() {
       password: 'kiran123',
     );
   });
-
   testWidgets('register view ...', (tester) async {
     when(mockBatchUsecase.getAllBatches())
         .thenAnswer((_) async => Right(lstBatchEntity));
