@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Buy Now Page',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
       home: const BuyNowPage(),
       debugShowCheckedModeBanner: false,
@@ -257,9 +257,10 @@ class PlaceOrderPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Handle the place order action (e.g., initiate payment)
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Order Placed Successfully!'),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectPaymentMethodPage(),
                     ),
                   );
                 },
@@ -267,6 +268,62 @@ class PlaceOrderPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SelectPaymentMethodPage extends StatelessWidget {
+  const SelectPaymentMethodPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select Payment Method'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Select Payment Method:',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            // List of recommended payment methods
+            ElevatedButton(
+              onPressed: () {
+                // Handle the selection of Esewa
+                // You can navigate to the next screen or perform other actions
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Esewa selected'),
+                  ),
+                );
+              },
+              child: const Text('Esewa'),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () {
+                // Handle the selection of Cash on Delivery
+                // You can navigate to the next screen or perform other actions
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Cash on Delivery selected'),
+                  ),
+                );
+              },
+              child: const Text('Cash on Delivery'),
+            ),
+            // Add more payment methods as needed
+          ],
         ),
       ),
     );
